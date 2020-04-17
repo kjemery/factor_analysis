@@ -28,5 +28,5 @@ This is accomplished using the following custom function libraries:
    
 Datasets included:
 
-1. hue-scaling
-2. motion-scaling
+1. hue scaling
+2. motion scaling
