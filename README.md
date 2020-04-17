@@ -1,5 +1,5 @@
 # factor_analysis
-Factor analysis protocol
+## Factor analysis protocol
 
 This repo includes code for a full recommended protocol to guide factor analyses. 
 
@@ -25,3 +25,8 @@ This is accomplished using the following custom function libraries:
 3. Fa_model.R - a function that pulls together all previously mentioned functions to implement the full 
    factor analysis protocol in one line of code
    (factor_analysis)
+   
+Datasets included:
+
+1. hue-scaling
+2. motion-scaling
