@@ -31,4 +31,4 @@ Datasets included:
 1. hue scaling
 2. motion scaling
 
-Workshop slides: https://bit.ly/34J1bed
+Workshop slides: https://bit.ly/2XLBEzA
