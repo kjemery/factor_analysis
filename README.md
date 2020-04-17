@@ -1,5 +1,5 @@
 # factor_analysis
-## Factor analysis protocol
+## Factor analysis protocol 
 
 This repo includes code for a full recommended protocol to guide factor analyses. 
 
@@ -30,3 +30,5 @@ Datasets included:
 
 1. hue scaling
 2. motion scaling
+
+Workshop slides: https://bit.ly/34J1bed
