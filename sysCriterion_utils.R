@@ -125,7 +125,7 @@ sysSolution <- function(n,faMat,fm,rotate="varimax",initF = 0,runLim=4,iteration
         faNF <- principal(faMat,nfactors=nF,residuals=TRUE,rotate=rotate,n.obs=n,scores=FALSE)
       }
       
-    } else if (fm == fmPara){
+    } else if (fm == 'mle'){
       faNF = fa(faMat,nF,n.obs=n,fm=fm,rotate=rotate,residuals=TRUE)
       
     }
