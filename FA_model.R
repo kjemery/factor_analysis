@@ -62,6 +62,8 @@ factor_analysis <- function(X, mat='cor', fm = 'pc', check_normality = TRUE, rot
       # parametric method: can change to whichever parametric method you'd like!
       fm = 'mle'
     }
+  } else {
+    chiTest = 'NA'
   }
   
   # DETERMINE number of factors to extract

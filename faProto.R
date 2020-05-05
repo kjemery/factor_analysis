@@ -30,7 +30,7 @@ loadPacks()
 ######################################################################################################################
 
 # LOAD and format data as X
-filename <- 'finalData_color.xlsx'
+filename <- 'finalData_motion.xlsx'
 scalingData <- read_excel(filename,col_names = TRUE)
 X <- matrix(as.numeric(unlist(scalingData)),nrow=dim(scalingData)[1])
 faMat <- cor(X, use = "pairwise.complete.obs")
@@ -66,7 +66,7 @@ eig <- eigen(faMat)
 plot(1:dim(faMat)[1],type='b',eig$values,main='scree plot',xlab='component',ylab='eigenvalue')
 
 # RUN factor analysis
-solution = factor_analysis(X, iterations=10)
+solution = factor_analysis(X, check_normality = FALSE, iterations=10)
 
 # VIEW model output
 faFinal = solution[[3,1]]

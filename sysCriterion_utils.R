@@ -132,7 +132,7 @@ sysSolution <- function(n,faMat,fm,rotate="varimax",initF = 0,runLim=4,iteration
     
     #find highest systematic loadings per factor
     sysLoadings = matrix(list(),nrow=nF,ncol=1)
-    
+
     for (factor in 1:nF) {
       ldgs = faNF$loadings[,factor]
       maxn = sort(abs(ldgs),decreasing=TRUE)
@@ -145,8 +145,35 @@ sysSolution <- function(n,faMat,fm,rotate="varimax",initF = 0,runLim=4,iteration
         #check if high loadings are part of systematic sequence
         if (runs$lengths[which(runs$values == 1)] >= runTh){
           cumIDX = cumsum(runs$lengths)
-          runIDX = which(runs$values == 1)
-          sysLoadings[[factor]] = ldgs[(cumIDX[runIDX-1]+1):cumIDX[runIDX]]
+          runIDX = which(runs$values == 1)[runs$lengths[which(runs$values == 1)] >= runTh]
+          
+          #find systematic sequence with max loadings
+          eval = matrix(list(),nrow=length(runIDX),ncol=1)
+          
+          for (r in 1:length(runIDX)){
+            if (runIDX[r] > 1){
+              eval[[r]] = abs(ldgs[(cumIDX[runIDX[r]-1]+1):cumIDX[runIDX[r]]])
+            } else {
+              eval[[r]] = abs(ldgs[1:cumIDX[1]])
+            }
+          }
+          
+          whichsys = matrix(0,nrow=1,ncol=r)
+          
+          for (r in 1:length(eval)){
+            if (sum(eval[[r]] == max(unlist(eval)))){
+              whichsys[r] = 1
+            }
+          }
+          
+          sysIDX = which(whichsys == 1)
+          
+          if (runIDX[sysIDX] > 1){
+            sysLoadings[[factor]] = ldgs[(cumIDX[runIDX[sysIDX]-1]+1):cumIDX[runIDX[sysIDX]]]
+          } else {
+            sysLoadings[[factor]] = ldgs[1:cumIDX[1]]
+          }
+          
         } else {
           idx = idx + 1
         }
