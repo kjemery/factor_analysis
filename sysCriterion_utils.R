@@ -143,7 +143,7 @@ sysSolution <- function(n,faMat,fm,rotate="varimax",initF = 0,runLim=4,iteration
         runs = rle(max_loadings)
         
         #check if high loadings are part of systematic sequence
-        if (runs$lengths[which(runs$values == 1)] >= runTh){
+        if (sum(runs$lengths[which(runs$values == 1)] >= runTh) > 0) {
           cumIDX = cumsum(runs$lengths)
           runIDX = which(runs$values == 1)[runs$lengths[which(runs$values == 1)] >= runTh]
           
@@ -184,7 +184,7 @@ sysSolution <- function(n,faMat,fm,rotate="varimax",initF = 0,runLim=4,iteration
     #evaluate the chance probability of the loading and run thresholds that characterize the current model
     #as long as runs for all factors exist, otherwise automatically search for different model
     if (sum(which(lengths(sysLoadings) < runTh)) == 0) {
-      ldgTh = min(unlist(sysLoadings))
+      ldgTh = min(abs(unlist(sysLoadings)))
       pSys = sysFactors(dim(X)[1],dim(X)[2],fm,rotate,nF,ldgTh,runTh,iterations)
     } else {
       pSys = 1
