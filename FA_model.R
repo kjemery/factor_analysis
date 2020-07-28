@@ -30,12 +30,13 @@
 # rotOrtho <- orthogonal rotation
 # rotOblique <- oblique rotation
 # extractMethod <- method to determine number of factors to extract ('sys','vss','map','parallel')
+# nF <- number of factors, only must be specified when extractMethod is 'none'
 # iterations <- for systematic tuning bootstrapping procedure, unused if different extractMethod is chosen
 # scores_method <- method of estimation for factor scores (see factor.scores in "psych" package 
 # for full documentation and options))
 
 factor_analysis <- function(X, mat='cor', fm = 'pc', check_normality = TRUE, rotOrtho='varimax',
-                            rotOblique='promax',extractMethod = 'sys', iterations = 1000, 
+                            rotOblique='promax',extractMethod = 'sys', nF = 0, iterations = 1000, 
                             scores_method='Thurstone'){
   
   # define dims
@@ -81,7 +82,9 @@ factor_analysis <- function(X, mat='cor', fm = 'pc', check_normality = TRUE, rot
   } else if (extractMethod == 'parallel'){
     nFpa2 = paran(X)
     nF = nFpa2$Retained
-  }
+  } else if (extractMethod == 'none'){
+    nF = nF
+  } 
   
   # CHOOSE rotation
   rotate_output = choose_rotation(faMat,n,fm,nF)
