@@ -66,7 +66,7 @@ eig <- eigen(faMat)
 plot(1:dim(faMat)[1],type='b',eig$values,main='scree plot',xlab='component',ylab='eigenvalue')
 
 # RUN factor analysis
-solution = factor_analysis(X, check_normality = FALSE, iterations=10)
+solution = factor_analysis(X, check_normality = FALSE, iterations=1000)
 
 # VIEW model output
 faFinal = solution[[3,1]]
@@ -78,3 +78,13 @@ visualize_solution(scalingData,faFinal)
 
 #VISUALIZE correlation plot for a single factor
 factor_corrplot(scalingData,faFinal,1)
+
+################################################################################################################
+
+# CHECK solution(s) of more or less factors
+nF = dim(faFinal$loadings)[2]
+solution_plus = factor_analysis(X, extractMethod = 'none', nF = nF + 1, check_normality = FALSE, iterations=1000)
+faFinal_plus = solution_plus[[3,1]]
+visualize_solution(scalingData,faFinal_plus)
+
+
