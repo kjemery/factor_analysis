@@ -46,7 +46,13 @@ loadPacks <- function(){
 multivariate_normality <- function(X){
   
   d2 <- rep(0,dim(X)[1])
-  S_1 <- solve(cov(X, use = "pairwise.complete.obs"))
+  
+  if (det(cor(X, use = "pairwise.complete.obs")) != 0){
+    S_1 <- solve(cov(X, use = "pairwise.complete.obs"))
+  } else {
+    S_1 <- ginv(cov(X, use = "pairwise.complete.obs"))
+  }
+  
   mu <- colMeans(X, na.rm = TRUE)
   
   for (i in 1:dim(X)[1]){
